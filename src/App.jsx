@@ -80,6 +80,16 @@ function App() {
     }
   };
 
+  const handleClear = () => {
+    setTeamA("");
+    setTeamB("");
+    setTotalPoints("");
+    setGamePoints([]);
+    setCurrentPoints({ teamA: 0, teamB: 0 });
+    setCumulativePoints({ teamA: 0, teamB: 0 });
+    setWinner(null);
+  };
+
   return (
     <div className="App">
       <h1>Point Tracker</h1>
@@ -101,7 +111,7 @@ function App() {
         />
         <br />
         <input
-          // type='number'
+          type="number"
           placeholder="Total Points"
           value={totalPoints}
           onChange={(e) => setTotalPoints(Number(e.target.value))}
@@ -113,7 +123,7 @@ function App() {
         <h2>Enter Game Points</h2>
         <span>Team {teamA} Points</span>
         <input
-          // type='number'
+          type="number"
           placeholder={`${teamA} Points`}
           value={currentPoints.teamA}
           onChange={(e) =>
@@ -126,7 +136,7 @@ function App() {
         <br />
         <span>Team {teamB} Points</span>
         <input
-          // type='number'
+          type="number"
           placeholder={`${teamB} Points`}
           value={currentPoints.teamB}
           onChange={(e) =>
@@ -142,6 +152,12 @@ function App() {
 
       <div className="winner-section">
         <button onClick={calculateWinner}>Calculate Winner</button>
+        <button
+          onClick={handleClear}
+          disabled={!winner || winner === "No Winner Yet"}
+        >
+          Clear
+        </button>
         <h2>Winner: {winner}</h2>
       </div>
 
